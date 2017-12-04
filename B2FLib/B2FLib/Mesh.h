@@ -2,9 +2,9 @@
 #define __MESH_H__
 
 #include <vector>
-#include "Geometry.h"
+#include <glm/glm.hpp>
 
-struct Face 
+struct face 
 {
 	std::vector<int> v_idx_list;
 	std::vector<int> vn_idx_list;
@@ -25,23 +25,24 @@ struct Face
 	}
 };
 
-class Mesh 
+class mesh 
 {
 
 public:
 
-	std::vector<Vec3f> v_list;	// v 1.0 1.0 1.0
-	std::vector<Vec3f> vn_list; // vn 1.0 1.0 1.0
-	std::vector<Vec2f> vt_list; // vt 1.0 1.0
-	std::vector<Face> f_list;	//  f v1/vt1/vn1 v2/vt2/vn2 v3/vt3/vn3 v4/vt4/vn4 ...
+	std::vector<glm::vec3> v_list;	// v 1.0 1.0 1.0
+	std::vector<glm::vec3> vn_list; // vn 1.0 1.0 1.0
+	std::vector<glm::vec2> vt_list; // vt 1.0 1.0
+	std::vector<face> f_list;	//  f v1/vt1/vn1 v2/vt2/vn2 v3/vt3/vn3 v4/vt4/vn4 ...
 
-	Mesh(const char *filename);
-	~Mesh();
+	mesh(const char *filename);
+	~mesh();
 
-	Vec3f getV(int face_idx, int v_idx) const;
-	Vec2f getVt(int face_idx, int vt_idx) const;
-	Vec3f getVn(int face_idx, int vn_idx) const;
+	glm::vec3 getV(int face_idx, int v_idx) const;
+	glm::vec2 getVt(int face_idx, int vt_idx) const;
+	glm::vec3 getVn(int face_idx, int vn_idx) const;
 	int nfaces() const;
+	int nverts() const;
 
 };
 
