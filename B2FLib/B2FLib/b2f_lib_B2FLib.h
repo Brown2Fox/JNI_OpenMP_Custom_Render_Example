@@ -13,7 +13,7 @@ extern "C" {
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_b2f_lib_B2FLib_calc(JNIEnv *, jclass, jint);
-JNIEXPORT jobjectArray JNICALL Java_b2f_lib_B2FLib_render(JNIEnv *, jclass, jint, jint);
+JNIEXPORT jobjectArray JNICALL Java_b2f_lib_B2FLib_render(JNIEnv *, jclass, jint width, jint height, jint depth);
 
 #ifdef __cplusplus
 }

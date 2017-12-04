@@ -39,25 +39,43 @@ Mesh::Mesh(const char *filename) : v_list(), f_list(), vn_list(), vt_list()
         }  
 		else if (!line.compare(0, 2, "f ")) 
 		{
-			Face f = {0};
+			Face f;
 			int v = 0;
 			int vt = 0;
 			int vn = 0;
-			int idx = 0;
 			iss >> trash;
             while (iss >> v >> trash >> vt >> trash >> vn) 
 			{
-                f.set(v, vt, vn, idx++);
+                f.push_back(v, vt, vn);
             }
             f_list.push_back(f);
         }
     }
-    std::cerr << "# v# " << v_list.size() << " f# "  << f_list.size() << " vt# " << vt_list.size() << " vn# " << vn_list.size() << std::endl;
+    std::cout << "# v# " << v_list.size() << " f# "  << f_list.size() << " vt# " << vt_list.size() << " vn# " << vn_list.size() << std::endl;
 }
 
 Mesh::~Mesh() {
 }
 
+Vec3f Mesh::getV(int face_idx, int v_idx) const
+{
+	return v_list[f_list[face_idx].v_idx_list[v_idx]];
+}
+
+Vec2f Mesh::getVt(int face_idx, int vt_idx) const
+{
+	return vt_list[f_list[face_idx].vt_idx_list[vt_idx]];
+}
+
+Vec3f Mesh::getVn(int face_idx, int vn_idx) const
+{
+	return vn_list[f_list[face_idx].vn_idx_list[vn_idx]];
+}
+
+int Mesh::nfaces() const 
+{
+	return f_list.size();
+}
 
 
 

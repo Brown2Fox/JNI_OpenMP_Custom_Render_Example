@@ -1,11 +1,11 @@
 package b2f.lib;
 
-import b2f.Point;
+import b2f.Pixel;
 
 public class B2FLib {
 
     public static native void calc(int a);
-    public static native Point[] render(int xSize, int ySize);
+    public static native Pixel[] render(int width, int height, int depth);
 
 
     static {

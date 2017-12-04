@@ -1,6 +1,6 @@
 package b2f.controllers;
 
-import b2f.Point;
+import b2f.Pixel;
 import b2f.lib.B2FLib;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -22,17 +22,22 @@ public class MainController {
 
     public void render() {
 
-        int xSize = 12;
-        int ySize = 100;
+        int xSize = 512;
+        int ySize = 512;
 
-        Point[] points = B2FLib.render(xSize, ySize);
+        Pixel[] image = B2FLib.render(xSize, ySize, 512);
+        canvas.getGraphicsContext2D().fillRect(0,0,1000, 1000);
 
-        int x = 0;
-        int y = 0;
-        for (Point p: points) {
-            pixelWriter.setColor(x, y, Color.rgb(p.getR(), p.getG(), p.getB()));
-            if (++x == xSize) { y++; x = 0; }
+        try {
+            for (Pixel p : image) {
+                pixelWriter.setColor(xSize - p.getX(), ySize - p.getY(), Color.rgb(p.getR(), p.getG(), p.getB()));
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
         }
+
+
     }
 
 
